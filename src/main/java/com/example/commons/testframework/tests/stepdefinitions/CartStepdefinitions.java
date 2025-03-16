@@ -3,15 +3,15 @@ package com.example.commons.testframework.tests.stepdefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.junit.Assert;
-import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 public class CartStepdefinitions {
 
@@ -51,7 +51,7 @@ public class CartStepdefinitions {
 
     @When("I select the first item from the results list")
     public void selectFirstItemFromTheList() {
-        WebElement firstItem = driver.findElement(By.xpath("(//h2/a/span)[1]"));
+        WebElement firstItem = driver.findElement(By.xpath("(//div[@data-component-type='s-search-result'])[1]//h2"));
         firstItem.click();
     }
 
@@ -74,13 +74,16 @@ public class CartStepdefinitions {
 
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
+        WebElement closeButton = driver.findElement(By.xpath("(//a[contains(@id, 'attach-close_sideSheet-link')])[1]"));
+        closeButton.click();
+
         WebElement myCart = driver.findElement(By.xpath("//div[@id='nav-tools']//a[4]"));
         myCart.click();
 
         //Get cart page price
         String cartPagePrice = driver.findElement(By.xpath("(//div[@class='sc-item-price-block']//span)[1]")).getText();
-        String[] cartPriceBreakdown = cartPagePrice.trim().split("\\s+");
-        String cartPrice = cartPriceBreakdown[0];
+        String finalCartPrice = cartPagePrice.replaceAll("[^0-9.,]", "").trim();
+        String cartPrice = finalCartPrice;
 
         // Verify prices
         Assert.assertEquals(productPrice, cartPrice);
