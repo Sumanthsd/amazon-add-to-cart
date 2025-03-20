@@ -77,7 +77,7 @@ public class CartStepdefinitions {
         WebElement closeButton = driver.findElement(By.xpath("(//a[contains(@id, 'attach-close_sideSheet-link')])[1]"));
         closeButton.click();
 
-        WebElement myCart = driver.findElement(By.xpath("//div[@id='nav-tools']//a[4]"));
+        WebElement myCart = driver.findElement(By.xpath("//div[@id='nav-tools']//a[@id='nav-cart']"));
         myCart.click();
 
         //Get cart page price
