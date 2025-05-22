@@ -7,37 +7,21 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CartStepdefinitions {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CartStepdefinitions.class);
 
     WebDriver driver;
 
     @Given("I open a Amazon website")
     public void openAmazonWebsite() {
-        double latitude = 37.7749;
-        double longitude = -122.4194;
-
-        //Set Chrome Options
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-notifications");
-
-        //Instantiate WebDriver with ChromeOptions
-        driver = new ChromeDriver(options);
-
+        driver = Hooks.getDriver();
         //Navigate to website
-        driver.manage().deleteAllCookies();
         driver.get("https://www.amazon.in/");
-
-        //Execute JavaScript to set the geolocation
-        String setLocationScript = String.format("navigator.geolocation.getCurrentPosition = function(success) { var position = { 'coords': { 'latitude': %s, 'longitude': %s }}; success(position); }", latitude, longitude);
-        ((JavascriptExecutor) driver).executeScript(setLocationScript);
-
-        driver.manage().window().maximize();
         driver.navigate().refresh();
     }
 

@@ -5,8 +5,8 @@ import io.cucumber.testng.CucumberOptions;
 import org.testng.annotations.DataProvider;
 
 @CucumberOptions(
-        features = "src/main/resources",
-        glue = {"com.example.commons.testframework.tests.stepdefinitions"},
+        features = "src/main/resources/features",
+        glue = {"com.example.commons.testframework.tests"},
         plugin = {"pretty",
                   "html:test-output/reports/cucumber/multiple.html",
                   "json:target/report,json,",
