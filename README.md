@@ -1,8 +1,8 @@
-Amazon Add to Cart Automation
+Add to Cart Feature
 
-This Java Selenium automation project verifies the Amazon add-to-cart functionality. It validates that the price of the product in the product results page and the cart page are identical. The script performs the following steps:
+This Java Selenium automation project verifies the Amazon and Flipkart add-to-cart functionality. It validates that the price of the product in the product results page and the cart page are identical. The script performs the following steps:
 
-1. Launches the Amazon website.
+1. Launches the Amazon/Flipkart website.
 2. Searches for a specific product.
 3. Retrieves the product price from the search results.
 4. Adds the product to the cart.

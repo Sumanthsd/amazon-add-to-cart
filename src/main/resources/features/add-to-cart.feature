@@ -37,3 +37,14 @@ Feature: Adding items to cart and verifying sub total
     Examples:
       | first_search | second_search |
       | Headphones   | Keyboard      |
+
+  @flpmonitor
+  Scenario Outline: Adding a monitor product to the cart and verifying sub total in Flipkart
+    Given I open the Flipkart website
+    When I search for "<item>" on Flipkart
+    And I select the first item from the Flipkart results list
+    And I add the first item to the Flipkart cart
+    Then I should see the Flipkart price identical to the product page
+    Examples:
+      | item    |
+      | Monitor |
